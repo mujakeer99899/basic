@@ -12,9 +12,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --primary: #FFD700; /* Gold */
-            --primary-dark: #DAA520; /* Darker Gold */
+            --primary: #FFD700;
+            /* Gold */
+            --primary-dark: #DAA520;
+            /* Darker Gold */
             --secondary: #10B981;
+            --instagram-start: #833AB4;
+            /* Instagram purple */
+            --instagram-mid: #FD1D1D;
+            /* Instagram pink */
+            --instagram-end: #F77737;
+            /* Instagram orange */
         }
 
         body {
@@ -33,9 +41,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background: linear-gradient(135deg, #000000 0%, #1C2526 100%); }
-            50% { background: linear-gradient(135deg, #0A0F12 0%, #2C3539 100%); }
-            100% { background: linear-gradient(135deg, #000000 0%, #1C2526 100%); }
+            0% {
+                background: linear-gradient(135deg, #000000 0%, #1C2526 100%);
+            }
+
+            50% {
+                background: linear-gradient(135deg, #0A0F12 0%, #2C3539 100%);
+            }
+
+            100% {
+                background: linear-gradient(135deg, #000000 0%, #1C2526 100%);
+            }
         }
 
         .service-card {
@@ -106,14 +122,53 @@
             transform: scale(1);
         }
 
+        .btn-instagram {
+            background: linear-gradient(135deg, var(--instagram-start), var(--instagram-mid), var(--instagram-end));
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--instagram-mid);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(253, 29, 29, 0.4);
+            filter: brightness(1.15);
+        }
+
+        .btn-instagram::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 40%);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-instagram:hover::after {
+            transform: scale(1);
+        }
+
         .floating {
             animation: floating 4s ease-in-out infinite;
         }
 
         @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .form-input:focus {
@@ -136,9 +191,20 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255, 215, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 12px rgba(255, 215, 0, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
         }
 
         .bg-pattern {
@@ -180,13 +246,51 @@
             width: 100%;
         }
 
+        .navButton {
+            transition: all 0.3s ease;
+            position: relative;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+
+        .navButton:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .navButton.pulse-active {
+            animation: clickPulse 0.3s ease;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 8px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+
         .icon-spin:hover {
             animation: spin 1s ease-in-out;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .card-glow:hover {
@@ -223,9 +327,17 @@
         }
 
         @keyframes logo-pulse {
-            0% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
-            50% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.5); }
-            100% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
+            0% {
+                text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+            }
+
+            50% {
+                text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+            }
         }
 
         .shiny-badge {
@@ -236,9 +348,17 @@
         }
 
         @keyframes shiny {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .btn-clicked {
@@ -247,7 +367,8 @@
             border-color: var(--primary-dark) !important;
         }
 
-        .services-btn:hover, .custom-package-btn:hover {
+        .services-btn:hover,
+        .custom-package-btn:hover {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
             color: #000000 !important;
             border-color: var(--primary-dark) !important;
@@ -349,7 +470,8 @@
                 font-size: 0.9rem;
             }
 
-            .btn-primary {
+            .btn-primary,
+            .btn-instagram {
                 font-size: 0.85rem;
                 padding: 0.6rem 1.2rem;
             }
@@ -360,6 +482,10 @@
 
             .text-lg {
                 font-size: 0.95rem;
+            }
+
+            .navButton {
+                padding: 0.75rem;
             }
         }
 
@@ -384,7 +510,8 @@
                 font-size: 0.85rem;
             }
 
-            .btn-primary {
+            .btn-primary,
+            .btn-instagram {
                 font-size: 0.8rem;
                 padding: 0.5rem 1rem;
             }
@@ -403,15 +530,15 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="#services" class="nav-link px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="#process" class="nav-link px-3 py-2 text-sm font-medium">Process</a>
-                    <a href="#contact" class="btn-primary px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
+                    <a href="#home" class="nav-link navButton px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#services" class="nav-link navButton px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#process" class="nav-link navButton px-3 py-2 text-sm font-medium">Process</a>
+                    <a href="#contact" class="btn-primary navButton px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button class="mobile-menu-button focus:outline-none">
-                        <svg class="w-6 h-6 icon-spin text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-6 h-6 icon-spin text-gold-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -419,10 +546,10 @@
                 </div>
             </div>
             <div class="mobile-menu md:hidden">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#process" class="nav-link">Process</a>
-                <a href="#contact" class="btn-primary px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
+                <a href="#home" class="nav-link navButton">Home</a>
+                <a href="#services" class="nav-link navButton">Services</a>
+                <a href="#process" class="nav-link navButton">Process</a>
+                <a href="#contact" class="btn-primary navButton px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
             </div>
         </div>
     </nav>
@@ -432,7 +559,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
             <div class="flex flex-col items-center">
                 <div class="w-full" data-aos="fade-right" data-aos-duration="800">
-                    <span class="bg-gold-400/20 px-4 py-1 rounded-full text-sm font-medium mb-4 inline-flex items-center">
+                    <span
+                        class="bg-gold-400/20 px-4 py-1 rounded-full text-sm font-medium mb-4 inline-flex items-center">
                         <svg class="w-4 h-4 mr-1 icon-spin text-gold-400" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -447,56 +575,21 @@
                         websites with stunning design, responsiveness, and functionality. A small service charge applies
                         for our expertise. 🕒 Slots are limited and allotted on a first-come, first-serve basis.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#contact"
-                            class="btn-primary px-6 py-3 rounded-md font-medium pulse-button">Book Your Slot
+                        <a href="#contact" class="btn-primary px-6 py-3 rounded-md font-medium pulse-button">Book Your
+                            Slot
                             Now</a>
                         <a href="#services"
                             class="bg-transparent border-2 border-gold-400 text-gold-400 px-6 py-3 rounded-md font-medium services-btn">Our
                             Services</a>
-                        <button id="whatsapp-btn"
-                            class="bg-green-500 text-white px-6 py-3 rounded-md font-medium hover:bg-green-600 flex items-center group">
+                        <a href="https://www.instagram.com/buildora" target="_blank"
+                            class="btn-instagram px-6 py-3 rounded-md font-medium flex items-center group">
                             <svg class="w-5 h-5 mr-2 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-6.29-12.38c-5.298 0-9.598 4.298-9.598 9.598 0 2.096.682 4.036 1.828 5.617L2 22l5.243-1.354a9.63 9.63 0 004.939 1.346h.004c5.298 0 9.598-4.298 9.598-9.599C22 6.3 17.7 2 12.402 2h-.004z" />
+                                    d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.541.07-2.927.427-4.027 1.527-1.1 1.1-1.458 2.486-1.527 4.027C2.014 8.333 2 8.741 2 12s.014 3.667.072 4.947c.07 1.541.427 2.927 1.527 4.027 1.1 1.1 2.486 1.458 4.027 1.527 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.541-.07 2.927-.427 4.027-1.527 1.1-1.1 1.458-2.486 1.527-4.027.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.07-1.541-.427-2.927-1.527-4.027-1.1-1.1-2.486-1.458-4.027-1.527-1.28-.058-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                             </svg>
-                            WhatsApp Query
-                        </button>
-                    </div>
-                    <div class="mt-8">
-                        <div class="flex items-center justify-center">
-                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                        </div>
-                        <p class="text-sm text-white/90">Trusted by 50+ clients this semester</p>
+                            Instagram Query
+                        </a>
                     </div>
                 </div>
             </div>
@@ -571,7 +664,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="service-card card-glow" data-aos="fade-up" data-aos-delay="100">
                     <div class="p-6">
-                        <div class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <div
+                            class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
                             <svg class="w-8 h-8 text-gold-400 card-icon" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -625,7 +719,8 @@
                         class="absolute top-0 right-0 shiny-badge text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                         POPULAR</div>
                     <div class="p-6">
-                        <div class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <div
+                            class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
                             <svg class="w-8 h-8 text-gold-400 card-icon" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -747,7 +842,8 @@
                                 project details.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pl-16">
-                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                            <div
+                                class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
                                 <p class="text-gray-300 text-center">Submit your project requirements to begin.</p>
                             </div>
                         </div>
@@ -763,7 +859,8 @@
                                 quote with timeline.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pr-16">
-                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                            <div
+                                class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
                                 <p class="text-gray-300 text-center">Detailed project discussion and planning.</p>
                             </div>
                         </div>
@@ -779,7 +876,8 @@
                                 regular updates.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pl-16">
-                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                            <div
+                                class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
                                 <p class="text-gray-300 text-center">Building your website with precision.</p>
                             </div>
                         </div>
@@ -795,7 +893,8 @@
                                 make payment.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pr-16">
-                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                            <div
+                                class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
                                 <p class="text-gray-300 text-center">Final delivery and satisfaction guaranteed.</p>
                             </div>
                         </div>
@@ -818,47 +917,14 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-black relative">
+    <section id="contact" class="py-8 bg-black relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-sm font-semibold tracking-wider text-gold-400 uppercase" data-aos="fade-up">Get in
-                    Touch</span>
-                <h2 class="text-3xl font-bold text-white mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Reserve
-                    Your Slot Now</h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Contact us to
-                    discuss your CSP project requirements and secure your slot today!</p>
-            </div>
-
-            <div class="max-w-lg mx-auto service-card p-8 rounded-lg shadow-sm card-glow border border-gold-400" data-aos="fade-up"
-                data-aos-delay="300">
-                <form action="#" method="POST">
-                    <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
-                        <input type="text" id="name" name="name"
-                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
-                            required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                        <input type="email" id="email" name="email"
-                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
-                            required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="message" class="block text-sm font-medium text-gray-300">Project Details</label>
-                        <textarea id="message" name="message" rows="4"
-                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
-                            required></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn-primary px-6 py-3 rounded-md font-medium">Submit
-                            Inquiry</button>
-                    </div>
-                </form>
+            <div class="text-center py-8">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSem1JnAIYrni8lxpGLtCZwr0ydi1L00bCDLYe4NJ1JHOhwfhQ/viewform?usp=header" class="btn-primary navButton px-6 py-3 rounded-md font-medium">Submit Details Now</a>
             </div>
         </div>
     </section>
-
+      
     <script>
         AOS.init({
             duration: 1000,
@@ -879,6 +945,21 @@
         // Toggle golden color for "Ask About Custom Packages" button on click
         document.querySelector('.custom-package-btn').addEventListener('click', function () {
             this.classList.toggle('btn-clicked');
+        });
+
+        // Add click effect for navigation buttons
+        document.querySelectorAll('.navButton').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                this.classList.add('pulse-active');
+                setTimeout(() => {
+                    this.classList.remove('pulse-active');
+                    if (href !== '#') {
+                        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 300); // Match duration of clickPulse animation
+            });
         });
     </script>
 </body>
