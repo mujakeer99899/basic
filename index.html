@@ -3,224 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Website</title>
+    <title>CSP Project Website Development by Seniors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary: #10B981;
+        }
+        
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-
-        header {
-            background-color: #b00000;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #222;
-            padding: 0.5rem 0;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #b00000;
-        }
-
-        .container {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .product {
-            display: inline-block;
-            background-color: #333;
-            color: #fff;
-            margin: 1rem;
-            padding: 1rem;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .product h2 {
-            font-size: 1.2rem;
-        }
-
-        footer {
-            text-align: center;
-            background-color: #222;
-            color: #fff;
-            padding: 1rem;
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
             position: relative;
-            bottom: 0;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
             width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 30%);
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(145deg, #ffffff, #f0f4ff);
+        }
+        
+        .service-card:hover .card-icon {
+            transform: rotateY(360deg) scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.5));
+        }
+        
+        .card-icon {
+            transition: all 0.5s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            filter: brightness(1.1);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, 
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4F46E5;
+            border-color: transparent;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+            filter: brightness(1.05);
+        }
+        
+        .pulse-button {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+            }
+        }
+        
+        .bg-pattern {
+            background-color: #f9fafb;
+            background-image: 
+                radial-gradient(#e5e7eb 1px, transparent 1px),
+                radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .icon-spin:hover {
+            animation: spin 1s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-glow:hover {
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>MUNEER STORES</h1>
-        <h4>BESIDE ANNA CANTEEN,RTC-BUSTAND,ATMAKUR</h4>
-    </header>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#products">Products</a>
-        <a href="#contact">Contact</a>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="ml-2 font-bold text-xl text-indigo-600">CSE Seniors</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#services" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#process" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Process</a>
+                    <a href="#testimonials" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Testimonials</a>
+                    <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button focus:outline-none">
+                        <svg class="w-6 h-6 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     </nav>
-    <div class="container" id="home">
-        <h2>Home</h2>
-        <p>Welcome to our shop. Explore our wide range of products below.</p>
-    </div>
-    <div class="container" id="products">
-        <h2>Products</h2>
-         <div class="product">
-            <img src="data:image/jpeg;base64,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" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white relative overflow-hidden">
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative z-10">
+            <div class="flex flex-col items-center">
+                <div class="w-full" data-aos="fade-right" data-aos-duration="800">
+                    <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium mb-4 inline-flex items-center">
+                        <svg class="w-4 h-4 mr-1 icon-spin" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"></path></svg>
+                        LIMITED SLOTS AVAILABLE
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">🚀 CSP Project Website Development by Seniors!</h1>
+                    <p class="text-lg mb-8 opacity-90">We, your seniors from the CSE department, are offering to develop your CSP (Creative Software Project) websites with proper design, responsiveness, and functionality. A small service charge will apply for the time and effort involved. 🕒 Slots are limited and will be allotted on a first-come, first-serve basis.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-md font-medium pulse-button">Book Your Slot Now</a>
+                        <a href="#services" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 hover:border-indigo-600">Our Services</a>
+                        <button id="whatsapp-btn" class="bg-green-500 text-white px-6 py-3 rounded-md font-medium hover:bg-green-600 flex items-center group">
+                            <svg class="w-5 h-5 mr-2 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-6.29-12.38c-5.298 0-9.598 4.298-9.598 9.598 0 2.096.682 4.036 1.828 5.617L2 22l5.243-1.354a9.63 9.63 0 004.939 1.346h.004c5.298 0 9.598-4.298 9.598-9.599C22 6.3 17.7 2 12.402 2h-.004z"/></svg>
+                            WhatsApp Query
+                        </button>
+                    </div>
+                    <div class="mt-8">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                        <p class="text-sm text-white/90">Trusted by 50+ juniors this semester</p>
+                    </div>
+                </div>
+            </div>
         </div>
-         <div class="product">
-            <img src="download.jpeg" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-white py-16 relative">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-pattern opacity-5"></div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-center">Fast Turnaround</h3>
+                    <p class="text-gray-600 text-center">Get your project completed within 3-5 days after submitting requirements with our efficient workflow.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-center">Secure Payment</h3>
+                    <p class="text-gray-600 text-center">Pay only after seeing the preview and being completely satisfied with the delivered work.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-center">Guaranteed Approval</h3>
+                    <p class="text-gray-600 text-center">All projects developed by our senior team have received 100% approval rate from faculty members.</p>
+                </div>
+            </div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50 relative">
+        <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-indigo-50 to-transparent z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">Our Offerings</span>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Comprehensive CSP Development Services</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">If you want a smooth, presentable, and ready-to-submit CSP website — we’ve got you covered! 🙌</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-white card-glow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-center">Basic CSP Website</h3>
+                        <p class="text-gray-600 text-center mb-6">Standard website with 5-7 pages, responsive design and basic functionality.</p>
+                        <ul class="space-y-2 text-gray-600 mb-6">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                5-7 Responsive Pages
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Basic Contact Form
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                1 Round of Revisions
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-3xl font-bold text-gray-900">₹1,999</span>
+                            <span class="text-sm text-gray-500 block">One-time payment</span>
+                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card bg-white card-glow relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-center">Premium CSP Website</h3>
+                        <p class="text-gray-600 text-center mb-6">Advanced website with 10+ pages, custom design and enhanced functionality.</p>
+                        <ul class="space-y-2 text-gray-600 mb-6">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                10+ Responsive Pages
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Advanced Contact Form
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Custom Animations
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                2 Rounds of Revisions
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                SEO Optimization
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-3xl font-bold text-gray-900">₹2,999</span>
+                            <span class="text-sm text-gray-500 block">One-time payment</span>
+                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card bg-white card-glow" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6">
+                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-center">E-Commerce CSP</h3>
+                        <p class="text-gray-600 text-center mb-6">Full-featured e-commerce website with product management and payment integration.</p>
+                        <ul class="space-y-2 text-gray-600 mb-6">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Product Management
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Shopping Cart
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Payment Gateway
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Admin Dashboard
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                3 Rounds of Revisions
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-3xl font-bold text-gray-900">₹3,999</span>
+                            <span class="text-sm text-gray-500 block">One-time payment</span>
+                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-600 mb-6">Need something custom? We can tailor our services to your exact requirements.</p>
+                <a href="#contact" class="bg-transparent border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-md font-medium hover:bg-indigo-600 hover:text-white inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Ask About Custom Packages
+                </a>
+            </div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">How It Works</span>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Our Simple 4-Step Process</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Get your CSP website developed quickly with our streamlined workflow</p>
+            </div>
+            
+            <div class="relative">
+                <div class="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-100 transform -translate-x-1/2"></div>
+                
+                <div class="space-y-12 lg:space-y-0">
+                    <div class="relative lg:flex items-center" data-aos="fade-right">
+                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-right">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">1</div>
+                            <h3 class="text-xl font-semibold mb-2">Contact Us</h3>
+                            <p class="text-gray-600">Fill out the contact form or DM us with your basic requirements and project details.</p>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-16">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
+                                <p class="text-gray-600 text-center">Submit your project requirements to begin.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative lg:flex flex-row-reverse items-center" data-aos="fade-left">
+                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-left">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">2</div>
+                            <h3 class="text-xl font-semibold mb-2">Discussion & Quote</h3>
+                            <p class="text-gray-600">We'll discuss your project in detail and provide a transparent quote with timeline.</p>
+                        </div>
+                        <div class="lg:w-1/2 lg:pr-16">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
+                                <p class="text-gray-600 text-center">Detailed project discussion and planning.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative lg:flex items-center" data-aos="fade-right">
+                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-right">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">3</div>
+                            <h3 class="text-xl font-semibold mb-2">Development</h3>
+                            <p class="text-gray-600">Our team builds your website according to requirements, with regular updates.</p>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-16">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
+                                <p class="text-gray-600 text-center">Building your website with precision.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative lg:flex flex-row-reverse items-center" data-aos="fade-left">
+                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-left">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">4</div>
+                            <h3 class="text-xl font-semibold mb-2">Delivery & Payment</h3>
+                            <p class="text-gray-600">You review the final website, request minor changes if needed, and make payment.</p>
+                        </div>
+                        <div class="lg:w-1/2 lg:pr-16">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
+                                <p class="text-gray-600 text-center">Final delivery and satisfaction guaranteed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#contact" class="btn-primary text-white px-8 py-3 rounded-md text-lg font-medium inline-flex items-center">
+                    Start Now
+                    <svg class="w-5 h-5 ml-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase">Success Stories</span>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2">What Our Juniors Say</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Hear from students who got their CSP projects developed by us</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm card-glow">
+                    <div class="mb-4">
+                        <h4 class="text-lg font-semibold">Rahul Sharma</h4>
+                        <p class="text-gray-600 text-sm">2nd Year CSE</p>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <div class="flex">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The team delivered an amazing CSP website in just 4 days! It was exactly what I needed for my project submission."</p>
+                </div>
+            </div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">Get in Touch</span>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Reserve Your Slot Now</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Contact us to discuss your CSP project requirements and secure your slot today!</p>
+            </div>
+            
+            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-sm card-glow" data-aos="fade-up" data-aos-delay="300">
+                <form action="#" method="POST">
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-medium text-gray-700">Project Details</label>
+                        <textarea id="message" name="message" rows="4" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary text-white px-6 py-3 rounded-md font-medium">Submit Inquiry</button>
+                    </div>
+                </form>
+            </div>
         </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-         <div class="product">
-            <img src="https://via.placeholder.com/200" alt="Product 1">
-            <h2>Product 1</h2>
-            <h2>Price: 11</h2>
-            <p>Quantity: 10</p>
-        </div>
-    </div>
-    <div class="container" id="contact">
-        <h2>Contact</h2>
-        <p>Email: muneersyed2004@gmail.com</p>
-        <p>Phone: 9989320259</p>
-    </div>
-    <footer>
-        <p>&copy; 2024 Shop Website. All rights reserved.</p>
-    </footer>
+    </section>
+
+    <script>
+        AOS.init();
+    </script>
 </body>
-</html>
+                </html>
