@@ -1,62 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSP Project Website Development by Seniors</title>
+    <title>CSP Project Website Development by BUILDORA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+
         :root {
-            --primary: #4F46E5;
-            --primary-dark: #4338CA;
+            --primary: #FFD700; /* Gold */
+            --primary-dark: #DAA520; /* Darker Gold */
             --secondary: #10B981;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            background: #000000;
+            color: #F5F5F5;
         }
-        
+
         .gradient-bg {
-            background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+            background: linear-gradient(135deg, #000000 0%, #1C2526 100%);
             position: relative;
             overflow: hidden;
+            animation: gradientShift 20s ease-in-out infinite;
         }
-        
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 30%);
-            z-index: 1;
+
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #000000 0%, #1C2526 100%); }
+            50% { background: linear-gradient(135deg, #0A0F12 0%, #2C3539 100%); }
+            100% { background: linear-gradient(135deg, #000000 0%, #1C2526 100%); }
         }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
+
         .service-card {
-            transition: all 0.3s ease;
-            transform: translateY(0);
-            background: white;
+            transition: all 0.5s ease;
+            transform: perspective(1000px) rotateY(0deg);
+            background: #1C2526;
+            border: 1px solid var(--primary);
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             z-index: 2;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(255, 215, 0, 0.1);
         }
-        
+
         .service-card::before {
             content: '';
             position: absolute;
@@ -66,35 +59,37 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
-        
+
         .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(145deg, #ffffff, #f0f4ff);
+            transform: perspective(1000px) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(145deg, #2C3539, #1C2526);
         }
-        
+
         .service-card:hover .card-icon {
-            transform: rotateY(360deg) scale(1.1);
-            filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.5));
+            transform: rotateY(360deg) scale(1.15);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
         }
-        
+
         .card-icon {
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #000000;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--primary-dark);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
-            filter: brightness(1.1);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
+            filter: brightness(1.15);
         }
-        
+
         .btn-primary::after {
             content: '';
             position: absolute;
@@ -102,82 +97,69 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(to right, 
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0) 100%);
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 40%);
+            transform: scale(0);
+            transition: transform 0.3s ease;
         }
-        
+
         .btn-primary:hover::after {
-            left: 100%;
+            transform: scale(1);
         }
-        
+
         .floating {
             animation: floating 4s ease-in-out infinite;
         }
-        
+
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
-        
+
         .form-input:focus {
             outline: none;
-            box-shadow: 0 0 0 2px #4F46E5;
+            box-shadow: 0 0 0 3px var(--primary);
             border-color: transparent;
         }
-        
+
         .hover-scale {
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.4s ease, filter 0.4s ease;
         }
-        
+
         .hover-scale:hover {
             transform: scale(1.05);
-            filter: brightness(1.05);
+            filter: brightness(1.1);
         }
-        
+
         .pulse-button {
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
-            }
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
-            }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255, 215, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
-        
+
         .bg-pattern {
-            background-color: #f9fafb;
-            background-image: 
-                radial-gradient(#e5e7eb 1px, transparent 1px),
-                radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-color: #1C2526;
+            background-image: radial-gradient(#FFD700 1px, transparent 1px);
             background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+            background-position: 0 0;
         }
-        
+
         .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 215, 0, 0.15);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.25);
         }
-        
+
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            color: #F5F5F5;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -188,12 +170,12 @@
             background: var(--primary);
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover {
             color: var(--primary);
             transform: translateY(-2px);
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
@@ -208,67 +190,313 @@
         }
 
         .card-glow:hover {
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .logo-text {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+            animation: logo-pulse 3s ease-in-out infinite;
+        }
+
+        .logo-text:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+        }
+
+        .logo-text::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        .logo-text:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        @keyframes logo-pulse {
+            0% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
+            50% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.5); }
+            100% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
+        }
+
+        .shiny-badge {
+            background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
+            color: #000000;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: shiny 2s ease-in-out infinite;
+        }
+
+        @keyframes shiny {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-clicked {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+            color: #000000 !important;
+            border-color: var(--primary-dark) !important;
+        }
+
+        .services-btn:hover, .custom-package-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+            color: #000000 !important;
+            border-color: var(--primary-dark) !important;
+        }
+
+        .process-number {
+            transition: none;
+        }
+
+        /* Mobile Responsiveness */
+        .mobile-menu {
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .gradient-bg {
+                padding: 2rem 1rem;
+            }
+
+            .gradient-bg h1 {
+                font-size: 2.25rem;
+                line-height: 1.3;
+            }
+
+            .gradient-bg p {
+                font-size: 0.95rem;
+            }
+
+            .gradient-bg .flex {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .service-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .service-card:hover {
+                transform: perspective(1000px) rotateY(0deg) translateY(-5px);
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .md\\:flex {
+                display: none;
+            }
+
+            .mobile-menu.active {
+                display: block;
+                background: #1C2526;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                border-top: 1px solid var(--primary);
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 0.75rem 0;
+                color: #F5F5F5;
+                font-size: 1.1rem;
+            }
+
+            .mobile-menu a:hover {
+                color: var(--primary);
+            }
+
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .process-step .lg\\:w-1\\/2 {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 1rem;
+            }
+
+            .bg-pattern {
+                background-size: 30px 30px;
+            }
+
+            .form-input {
+                font-size: 0.9rem;
+            }
+
+            .btn-primary {
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .text-3xl {
+                font-size: 1.75rem;
+            }
+
+            .text-lg {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 1rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .service-card p {
+                font-size: 0.85rem;
+            }
+
+            .btn-primary {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-black">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50 glass-effect">
+    <nav class="bg-black shadow-lg sticky top-0 z-50 glass-effect">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="ml-2 font-bold text-xl text-indigo-600">CSE Seniors</span>
+                        <span class="ml-2 font-bold text-xl text-gold-400 logo-text">BUILDORA</span>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="#services" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="#process" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Process</a>
-                    <a href="#testimonials" class="nav-link text-gray-700 px-3 py-2 text-sm font-medium">Testimonials</a>
-                    <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
+                    <a href="#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#services" class="nav-link px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#process" class="nav-link px-3 py-2 text-sm font-medium">Process</a>
+                    <a href="#contact" class="btn-primary px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button class="mobile-menu-button focus:outline-none">
-                        <svg class="w-6 h-6 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <svg class="w-6 h-6 icon-spin text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
                 </div>
+            </div>
+            <div class="mobile-menu md:hidden">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#contact" class="btn-primary px-6 py-2 rounded-md text-sm font-medium">Reserve Slot</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="gradient-bg text-white relative overflow-hidden">
-        <div id="particles-js" class="absolute inset-0 z-0"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
             <div class="flex flex-col items-center">
                 <div class="w-full" data-aos="fade-right" data-aos-duration="800">
-                    <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium mb-4 inline-flex items-center">
-                        <svg class="w-4 h-4 mr-1 icon-spin" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"></path></svg>
+                    <span class="bg-gold-400/20 px-4 py-1 rounded-full text-sm font-medium mb-4 inline-flex items-center">
+                        <svg class="w-4 h-4 mr-1 icon-spin text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
+                                clip-rule="evenodd"></path>
+                        </svg>
                         LIMITED SLOTS AVAILABLE
                     </span>
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">🚀 CSP Project Website Development by Seniors!</h1>
-                    <p class="text-lg mb-8 opacity-90">We, your seniors from the CSE department, are offering to develop your CSP (Creative Software Project) websites with proper design, responsiveness, and functionality. A small service charge will apply for the time and effort involved. 🕒 Slots are limited and will be allotted on a first-come, first-serve basis.</p>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">🚀 CSP Project Website Development by
+                        BUILDORA!</h1>
+                    <p class="text-lg mb-8 opacity-90">We are offering to develop your CSP (Creative Software Project)
+                        websites with stunning design, responsiveness, and functionality. A small service charge applies
+                        for our expertise. 🕒 Slots are limited and allotted on a first-come, first-serve basis.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#contact" class="btn-primary text-white px-6 py-3 rounded-md font-medium pulse-button">Book Your Slot Now</a>
-                        <a href="#services" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-indigo-600 hover:border-indigo-600">Our Services</a>
-                        <button id="whatsapp-btn" class="bg-green-500 text-white px-6 py-3 rounded-md font-medium hover:bg-green-600 flex items-center group">
-                            <svg class="w-5 h-5 mr-2 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-6.29-12.38c-5.298 0-9.598 4.298-9.598 9.598 0 2.096.682 4.036 1.828 5.617L2 22l5.243-1.354a9.63 9.63 0 004.939 1.346h.004c5.298 0 9.598-4.298 9.598-9.599C22 6.3 17.7 2 12.402 2h-.004z"/></svg>
+                        <a href="#contact"
+                            class="btn-primary px-6 py-3 rounded-md font-medium pulse-button">Book Your Slot
+                            Now</a>
+                        <a href="#services"
+                            class="bg-transparent border-2 border-gold-400 text-gold-400 px-6 py-3 rounded-md font-medium services-btn">Our
+                            Services</a>
+                        <button id="whatsapp-btn"
+                            class="bg-green-500 text-white px-6 py-3 rounded-md font-medium hover:bg-green-600 flex items-center group">
+                            <svg class="w-5 h-5 mr-2 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-6.29-12.38c-5.298 0-9.598 4.298-9.598 9.598 0 2.096.682 4.036 1.828 5.617L2 22l5.243-1.354a9.63 9.63 0 004.939 1.346h.004c5.298 0 9.598-4.298 9.598-9.599C22 6.3 17.7 2 12.402 2h-.004z" />
+                            </svg>
                             WhatsApp Query
                         </button>
                     </div>
                     <div class="mt-8">
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <div class="flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
                         </div>
-                        <p class="text-sm text-white/90">Trusted by 50+ juniors this semester</p>
+                        <p class="text-sm text-white/90">Trusted by 50+ clients this semester</p>
                     </div>
                 </div>
             </div>
@@ -276,169 +504,215 @@
     </section>
 
     <!-- Features Section -->
-    <section class="bg-white py-16 relative">
+    <section class="py-16 bg-black relative">
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-full bg-pattern opacity-5"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                <div class="service-card p-6 rounded-lg shadow-sm card-glow border border-gold-400" data-aos="zoom-in"
+                    data-aos-delay="100">
+                    <div class="w-12 h-12 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-gold-400 card-icon" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2 text-center">Fast Turnaround</h3>
-                    <p class="text-gray-600 text-center">Get your project completed within 3-5 days after submitting requirements with our efficient workflow.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-center text-gold-400">Fast Turnaround</h3>
+                    <p class="text-gray-300 text-center">Get your project completed within 3-5 days after submitting
+                        requirements with our efficient workflow.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                <div class="service-card p-6 rounded-lg shadow-sm card-glow border border-gold-400" data-aos="zoom-in"
+                    data-aos-delay="200">
+                    <div class="w-12 h-12 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-gold-400 card-icon" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2 text-center">Secure Payment</h3>
-                    <p class="text-gray-600 text-center">Pay only after seeing the preview and being completely satisfied with the delivered work.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-center text-gold-400">Secure Payment</h3>
+                    <p class="text-gray-300 text-center">Pay only after seeing the preview and being completely
+                        satisfied with the delivered work.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm card-glow border border-gray-100" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <svg class="w-6 h-6 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                <div class="service-card p-6 rounded-lg shadow-sm card-glow border border-gold-400" data-aos="zoom-in"
+                    data-aos-delay="300">
+                    <div class="w-12 h-12 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <svg class="w-6 h-6 text-gold-400 card-icon" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2 text-center">Guaranteed Approval</h3>
-                    <p class="text-gray-600 text-center">All projects developed by our senior team have received 100% approval rate from faculty members.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-center text-gold-400">Guaranteed Approval</h3>
+                    <p class="text-gray-300 text-center">All projects developed by our team have received 100%
+                        approval rate from faculty members.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50 relative">
-        <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-indigo-50 to-transparent z-0"></div>
+    <section id="services" class="py-16 bg-black relative">
+        <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-gold-400/10 to-transparent z-0"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
-                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">Our Offerings</span>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Comprehensive CSP Development Services</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">If you want a smooth, presentable, and ready-to-submit CSP website — we’ve got you covered! 🙌</p>
+                <span class="text-sm font-semibold tracking-wider text-gold-400 uppercase" data-aos="fade-up">Our
+                    Offerings</span>
+                <h2 class="text-3xl font-bold text-white mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">
+                    Comprehensive CSP Development Services</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">If you want a
+                    smooth, presentable, and ready-to-submit CSP website — we’ve got you covered! 🙌</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-white card-glow" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="service-card card-glow" data-aos="fade-up" data-aos-delay="100">
                     <div class="p-6">
-                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
-                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        <div class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <svg class="w-8 h-8 text-gold-400 card-icon" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">Basic CSP Website</h3>
-                        <p class="text-gray-600 text-center mb-6">Standard website with 5-7 pages, responsive design and basic functionality.</p>
-                        <ul class="space-y-2 text-gray-600 mb-6">
+                        <h3 class="text-xl font-semibold mb-3 text-center text-gold-400">Basic CSP Website</h3>
+                        <p class="text-gray-300 text-center mb-6">Standard website with 5-7 pages, responsive design and
+                            basic functionality.</p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 5-7 Responsive Pages
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 Basic Contact Form
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 1 Round of Revisions
                             </li>
                         </ul>
                         <div class="text-center">
-                            <span class="text-3xl font-bold text-gray-900">₹1,999</span>
-                            <span class="text-sm text-gray-500 block">One-time payment</span>
-                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
+                            <span class="text-3xl font-bold text-white">₹1,999</span>
+                            <span class="text-sm text-gray-400 block">One-time payment</span>
+                            <a href="#contact"
+                                class="btn-primary px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get
+                                Started</a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="service-card bg-white card-glow relative" data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+
+                <div class="service-card card-glow relative" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="absolute top-0 right-0 shiny-badge text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
+                        POPULAR</div>
                     <div class="p-6">
-                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
-                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        <div class="w-14 h-14 bg-gold-400/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <svg class="w-8 h-8 text-gold-400 card-icon" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                </path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">Premium CSP Website</h3>
-                        <p class="text-gray-600 text-center mb-6">Advanced website with 10+ pages, custom design and enhanced functionality.</p>
-                        <ul class="space-y-2 text-gray-600 mb-6">
+                        <h3 class="text-xl font-semibold mb-3 text-center text-gold-400">Premium CSP Website</h3>
+                        <p class="text-gray-300 text-center mb-6">Advanced website with 10+ pages, custom design and
+                            enhanced functionality.</p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 10+ Responsive Pages
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 Advanced Contact Form
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 Custom Animations
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Interactive Elements
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Analytics Integration
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 2 Rounds of Revisions
                             </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                SEO Optimization
-                            </li>
                         </ul>
                         <div class="text-center">
-                            <span class="text-3xl font-bold text-gray-900">₹2,999</span>
-                            <span class="text-sm text-gray-500 block">One-time payment</span>
-                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card bg-white card-glow" data-aos="fade-up" data-aos-delay="300">
-                    <div class="p-6">
-                        <div class="w-14 h-14 bg-indigo-50 rounded-full flex items-center justify-center mb-4 mx-auto">
-                            <svg class="w-8 h-8 text-indigo-600 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-center">E-Commerce CSP</h3>
-                        <p class="text-gray-600 text-center mb-6">Full-featured e-commerce website with product management and payment integration.</p>
-                        <ul class="space-y-2 text-gray-600 mb-6">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Product Management
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Shopping Cart
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Payment Gateway
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Admin Dashboard
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                3 Rounds of Revisions
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <span class="text-3xl font-bold text-gray-900">₹3,999</span>
-                            <span class="text-sm text-gray-500 block">One-time payment</span>
-                            <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get Started</a>
+                            <span class="text-3xl font-bold text-white">₹2,999</span>
+                            <span class="text-sm text-gray-400 block">One-time payment</span>
+                            <a href="#contact"
+                                class="btn-primary px-6 py-2 rounded-md text-sm font-medium inline-block mt-4">Get
+                                Started</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-16 text-center">
-                <p class="text-gray-600 mb-6">Need something custom? We can tailor our services to your exact requirements.</p>
-                <a href="#contact" class="bg-transparent border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-md font-medium hover:bg-indigo-600 hover:text-white inline-flex items-center">
-                    <svg class="w-5 h-5 mr-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-gray-300 mb-6">Need something custom? We can tailor our services to your exact
+                    requirements.</p>
+                <a href="#contact"
+                    class="bg-transparent border-2 border-gold-400 text-gold-400 px-6 py-2 rounded-md font-medium custom-package-btn inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                     Ask About Custom Packages
                 </a>
             </div>
@@ -446,136 +720,139 @@
     </section>
 
     <!-- Process Section -->
-    <section id="process" class="py-16 bg-white">
+    <section id="process" class="py-16 bg-black relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">How It Works</span>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Our Simple 4-Step Process</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Get your CSP website developed quickly with our streamlined workflow</p>
+                <span class="text-sm font-semibold tracking-wider text-gold-400 uppercase" data-aos="fade-up">How It
+                    Works</span>
+                <h2 class="text-3xl font-bold text-white mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Our
+                    Simple 4-Step Process</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Get your CSP
+                    website developed quickly with our streamlined workflow</p>
             </div>
-            
+
             <div class="relative">
-                <div class="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-100 transform -translate-x-1/2"></div>
-                
+                <div
+                    class="hidden lg:block absolute left-1/2 top-0 h-full w-0.5 bg-gold-400/20 transform -translate-x-1/2">
+                </div>
+
                 <div class="space-y-12 lg:space-y-0">
-                    <div class="relative lg:flex items-center" data-aos="fade-right">
-                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-right">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">1</div>
-                            <h3 class="text-xl font-semibold mb-2">Contact Us</h3>
-                            <p class="text-gray-600">Fill out the contact form or DM us with your basic requirements and project details.</p>
+                    <div class="relative lg:flex items-center process-step" data-aos="fade-right">
+                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-center lg:text-right">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold-400/20 text-gold-400 text-xl font-bold mb-4 border-4 border-black shadow-lg process-number">
+                                1</div>
+                            <h3 class="text-xl font-semibold mb-2 text-gold-400">Contact Us</h3>
+                            <p class="text-gray-300">Fill out the contact form or DM us with your basic requirements and
+                                project details.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pl-16">
-                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
-                                <p class="text-gray-600 text-center">Submit your project requirements to begin.</p>
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                                <p class="text-gray-300 text-center">Submit your project requirements to begin.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="relative lg:flex flex-row-reverse items-center" data-aos="fade-left">
-                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-left">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">2</div>
-                            <h3 class="text-xl font-semibold mb-2">Discussion & Quote</h3>
-                            <p class="text-gray-600">We'll discuss your project in detail and provide a transparent quote with timeline.</p>
+
+                    <div class="relative lg:flex flex-row-reverse items-center process-step" data-aos="fade-left">
+                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-center lg:text-left">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold-400/20 text-gold-400 text-xl font-bold mb-4 border-4 border-black shadow-lg process-number">
+                                2</div>
+                            <h3 class="text-xl font-semibold mb-2 text-gold-400">Discussion & Quote</h3>
+                            <p class="text-gray-300">We'll discuss your project in detail and provide a transparent
+                                quote with timeline.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pr-16">
-                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
-                                <p class="text-gray-600 text-center">Detailed project discussion and planning.</p>
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                                <p class="text-gray-300 text-center">Detailed project discussion and planning.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="relative lg:flex items-center" data-aos="fade-right">
-                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-right">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">3</div>
-                            <h3 class="text-xl font-semibold mb-2">Development</h3>
-                            <p class="text-gray-600">Our team builds your website according to requirements, with regular updates.</p>
+
+                    <div class="relative lg:flex items-center process-step" data-aos="fade-right">
+                        <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0 text-center lg:text-right">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold-400/20 text-gold-400 text-xl font-bold mb-4 border-4 border-black shadow-lg process-number">
+                                3</div>
+                            <h3 class="text-xl font-semibold mb-2 text-gold-400">Development</h3>
+                            <p class="text-gray-300">Our team builds your website according to requirements, with
+                                regular updates.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pl-16">
-                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
-                                <p class="text-gray-600 text-center">Building your website with precision.</p>
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                                <p class="text-gray-300 text-center">Building your website with precision.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="relative lg:flex flex-row-reverse items-center" data-aos="fade-left">
-                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-left">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 text-xl font-bold mb-4 border-4 border-white shadow-lg card-glow">4</div>
-                            <h3 class="text-xl font-semibold mb-2">Delivery & Payment</h3>
-                            <p class="text-gray-600">You review the final website, request minor changes if needed, and make payment.</p>
+
+                    <div class="relative lg:flex flex-row-reverse items-center process-step" data-aos="fade-left">
+                        <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0 text-center lg:text-left">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold-400/20 text-gold-400 text-xl font-bold mb-4 border-4 border-black shadow-lg process-number">
+                                4</div>
+                            <h3 class="text-xl font-semibold mb-2 text-gold-400">Delivery & Payment</h3>
+                            <p class="text-gray-300">You review the final website, request minor changes if needed, and
+                                make payment.</p>
                         </div>
                         <div class="lg:w-1/2 lg:pr-16">
-                            <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover-scale card-glow">
-                                <p class="text-gray-600 text-center">Final delivery and satisfaction guaranteed.</p>
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-sm hover-scale card-glow border border-gold-400">
+                                <p class="text-gray-300 text-center">Final delivery and satisfaction guaranteed.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-16 text-center">
-                <a href="#contact" class="btn-primary text-white px-8 py-3 rounded-md text-lg font-medium inline-flex items-center">
+                <a href="#contact"
+                    class="btn-primary px-8 py-3 rounded-md text-lg font-medium inline-flex items-center">
                     Start Now
-                    <svg class="w-5 h-5 ml-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="w-5 h-5 ml-2 icon-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase">Success Stories</span>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2">What Our Juniors Say</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Hear from students who got their CSP projects developed by us</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-sm card-glow">
-                    <div class="mb-4">
-                        <h4 class="text-lg font-semibold">Rahul Sharma</h4>
-                        <p class="text-gray-600 text-sm">2nd Year CSE</p>
-                    </div>
-                    <div class="flex items-center mb-3">
-                        <div class="flex">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"The team delivered an amazing CSP website in just 4 days! It was exactly what I needed for my project submission."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
+    <section id="contact" class="py-16 bg-black relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-sm font-semibold tracking-wider text-indigo-600 uppercase" data-aos="fade-up">Get in Touch</span>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Reserve Your Slot Now</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Contact us to discuss your CSP project requirements and secure your slot today!</p>
+                <span class="text-sm font-semibold tracking-wider text-gold-400 uppercase" data-aos="fade-up">Get in
+                    Touch</span>
+                <h2 class="text-3xl font-bold text-white mb-4 mt-2" data-aos="fade-up" data-aos-delay="100">Reserve
+                    Your Slot Now</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Contact us to
+                    discuss your CSP project requirements and secure your slot today!</p>
             </div>
-            
-            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-sm card-glow" data-aos="fade-up" data-aos-delay="300">
+
+            <div class="max-w-lg mx-auto service-card p-8 rounded-lg shadow-sm card-glow border border-gold-400" data-aos="fade-up"
+                data-aos-delay="300">
                 <form action="#" method="POST">
                     <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                        <input type="text" id="name" name="name" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
+                        <input type="text" id="name" name="name"
+                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
+                            required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" name="email" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
+                            required>
                     </div>
                     <div class="mb-6">
-                        <label for="message" class="block text-sm font-medium text-gray-700">Project Details</label>
-                        <textarea id="message" name="message" rows="4" class="form-input mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required></textarea>
+                        <label for="message" class="block text-sm font-medium text-gray-300">Project Details</label>
+                        <textarea id="message" name="message" rows="4"
+                            class="form-input mt-1 block w-full px-4 py-2 border border-gold-400 rounded-md focus:ring-gold-400 focus:border-gold-400 bg-gray-900 text-white"
+                            required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn-primary text-white px-6 py-3 rounded-md font-medium">Submit Inquiry</button>
+                        <button type="submit" class="btn-primary px-6 py-3 rounded-md font-medium">Submit
+                            Inquiry</button>
                     </div>
                 </form>
             </div>
@@ -583,7 +860,27 @@
     </section>
 
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-quart',
+            once: true
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function () {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+
+        // Toggle golden color for "Our Services" button on click
+        document.querySelector('.services-btn').addEventListener('click', function () {
+            this.classList.toggle('btn-clicked');
+        });
+
+        // Toggle golden color for "Ask About Custom Packages" button on click
+        document.querySelector('.custom-package-btn').addEventListener('click', function () {
+            this.classList.toggle('btn-clicked');
+        });
     </script>
 </body>
-                </html>
+
+</html>
