@@ -20,24 +20,26 @@
     <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
     <!-- AOS CSS for animation styles -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Poppins font for consistent typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        /* Import Poppins font for consistent typography */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-        /* Root variables for theming */
+        /* Root variables for black-only theming */
         :root {
-            --primary: #FFD700;
-            /* Gold for primary accents */
-            --primary-dark: #DAA520;
-            /* Darker gold for gradients */
-            --secondary: #10B981;
-            /* Green for secondary accents */
+            --primary: #E5B80B;
+            /* Muted gold for accents */
+            --primary-dark: #B8970A;
+            /* Darker muted gold */
+            --background: #0F0F0F;
+            /* Deep black background */
+            --black-accent: #1C1C1C;
+            /* Lighter black for cards */
+            --gray-accent: #4B4B4B;
+            /* Gray for text and borders */
             --instagram-start: #833AB4;
-            /* Instagram gradient start */
             --instagram-mid: #FD1D1D;
-            /* Instagram gradient middle */
-            --instagram-end: #F77737;
-            /* Instagram gradient end */
+            --instagram-end: #F56040;
+            /* Instagram colors for hover effect */
         }
 
         /* Base body styling */
@@ -45,14 +47,14 @@
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
             overflow-x: hidden;
-            background: #000000;
+            background: var(--background);
             color: #F5F5F5;
             margin: 0;
             padding: 0;
             position: relative;
         }
 
-        /* Full-screen Particles.js canvas for golden star background */
+        /* Full-screen Particles.js canvas */
         #particles-js {
             position: fixed;
             top: 0;
@@ -60,10 +62,10 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: #000000;
+            background: var(--background);
         }
 
-        /* Transparent backgrounds for sections to show stars */
+        /* Transparent backgrounds */
         section,
         nav,
         footer {
@@ -79,7 +81,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000;
+            background: var(--background);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -104,40 +106,31 @@
 
         /* Hero section gradient overlay */
         .gradient-bg {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(28, 37, 38, 0.5));
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.8), rgba(28, 28, 28, 0.5));
             position: relative;
             overflow: hidden;
             animation: gradientShift 20s ease-in-out infinite;
         }
 
         @keyframes gradientShift {
-            0% {
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(28, 37, 38, 0.5));
-            }
-
-            50% {
-                background: linear-gradient(135deg, rgba(10, 15, 18, 0.8), rgba(44, 53, 57, 0.5));
-            }
-
-            100% {
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(28, 37, 38, 0.5));
-            }
+            0% { background: linear-gradient(135deg, rgba(15, 15, 15, 0.8), rgba(28, 28, 28, 0.5)); }
+            50% { background: linear-gradient(135deg, rgba(28, 28, 28, 0.8), rgba(15, 15, 15, 0.5)); }
+            100% { background: linear-gradient(135deg, rgba(15, 15, 15, 0.8), rgba(28, 28, 28, 0.5)); }
         }
 
-        /* Service card styling with reduced size */
+        /* Service card styling */
         .service-card {
             perspective: 1000px;
-            background: rgba(28, 37, 38, 0.9);
+            background: var(--black-accent);
             border: 1px solid var(--primary);
             border-radius: 10px;
             overflow: hidden;
             position: relative;
             z-index: 2;
-            box-shadow: 0 8px 12px -3px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 8px 12px -3px rgba(229, 184, 11, 0.2);
             transition: all 0.5s ease;
             padding: 1rem;
             max-width: 350px;
-            /* Reduced width for services */
             margin: 0 auto 1rem;
         }
 
@@ -151,32 +144,23 @@
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
 
-        /* Enhanced hover effects for service cards */
         .service-card:hover {
             transform: perspective(1000px) rotateY(5deg) translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 20px -5px rgba(255, 215, 0, 0.5);
-            background: linear-gradient(145deg, #2C3539, #1C2526);
+            box-shadow: 0 15px 20px -5px rgba(229, 184, 11, 0.5);
+            background: linear-gradient(145deg, var(--black-accent), rgba(15, 15, 15, 0.3));
             border-color: var(--primary-dark);
             animation: borderPulse 1.5s infinite;
         }
 
         @keyframes borderPulse {
-            0% {
-                border-color: var(--primary);
-            }
-
-            50% {
-                border-color: var(--primary-dark);
-            }
-
-            100% {
-                border-color: var(--primary);
-            }
+            0% { border-color: var(--primary); }
+            50% { border-color: var(--primary-dark); }
+            100% { border-color: var(--primary); }
         }
 
         .service-card:hover .card-icon {
             transform: rotateY(360deg) scale(1.2) translateY(-5px);
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+            filter: drop-shadow(0 0 15px rgba(229, 184, 11, 0.7));
             animation: bounce 0.3s ease;
         }
 
@@ -188,109 +172,104 @@
         }
 
         @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
-        /* Primary button styling with enhanced hover */
-        .btn-primary {
+        /* Button styling for btn-primary, services-btn, custom-package-btn */
+        .btn-primary, .services-btn, .custom-package-btn {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #000000;
+            color: #1C1C1C;
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            border: 1px solid var(--primary-dark);
+            border: 2px solid var(--primary-dark);
             position: relative;
-            overflow: hidden;
             transition: all 0.3s ease;
             font-weight: 500;
             font-size: 0.9rem;
+            z-index: 1;
+            display: inline-block;
+        }
+
+        .services-btn, .custom-package-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover, .services-btn:hover, .custom-package-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(229, 184, 11, 0.3);
+            color: #1C1C1C;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.05) rotate(2deg);
-            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
-            filter: brightness(1.2);
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            animation: glowPulse 1s infinite;
+            color: #FFFFFF;
         }
 
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease;
-        }
-
-        .btn-primary:active::after {
-            width: 150px;
-            height: 150px;
-        }
-
-        @keyframes glowPulse {
-            0% {
-                box-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
-            }
-
-            50% {
-                box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            }
-
-            100% {
-                box-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
-            }
-        }
-
-        /* Instagram button styling with enhanced hover */
+        /* Enhanced Instagram button styling with post-click hover effect */
         .btn-instagram {
             background: linear-gradient(135deg, var(--instagram-start), var(--instagram-mid), var(--instagram-end));
             color: #FFFFFF;
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            border: 1px solid var(--instagram-mid);
+            border: 3px solid var(--gray-accent);
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             font-weight: 500;
             font-size: 0.9rem;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .btn-instagram:hover {
-            transform: translateY(-2px) scale(1.05) rotate(2deg);
-            box-shadow: 0 6px 12px rgba(253, 29, 29, 0.6);
-            filter: brightness(1.2);
-            background: linear-gradient(135deg, var(--instagram-end), var(--instagram-start));
-            animation: glowPulse 1s infinite;
+        .btn-instagram:hover, .btn-instagram.clicked:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, var(--instagram-start), var(--instagram-mid), var(--instagram-end));
+            background-size: 200%;
+            border: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--instagram-start), var(--instagram-end)) 1;
+            box-shadow: 0 8px 20px rgba(253, 29, 29, 0.5);
+            animation: gradientFlow 2s ease-in-out infinite, pulseGlow 1.5s ease-in-out infinite;
+            color: #FFFFFF;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            background-size: 300%;
+            animation: shine 1s ease-in-out infinite, gradientFlow 2s ease-in-out infinite;
         }
 
-        .btn-instagram::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s ease, height 0.3s ease;
+        .btn-instagram.clicked {
+            background: linear-gradient(135deg, var(--instagram-start), var(--instagram-mid), var(--instagram-end));
+            border: 3px solid var(--gray-accent);
+            color: #FFFFFF;
         }
 
-        .btn-instagram:active::after {
-            width: 150px;
-            height: 150px;
+        .btn-instagram:hover svg, .btn-instagram.clicked:hover svg {
+            animation: bounce 0.5s ease, spin 0.5s ease;
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shine {
+            0% { background-position: -200%; }
+            100% { background-position: 200%; }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 8px 20px rgba(253, 29, 29, 0.5); }
+            50% { box-shadow: 0 8px 25px rgba(253, 29, 29, 0.7); }
+            100% { box-shadow: 0 8px 20px rgba(253, 29, 29, 0.5); }
         }
 
         /* Typing effect for hero title */
@@ -305,13 +284,8 @@
         }
 
         @keyframes typing {
-            0% {
-                width: 0;
-            }
-
-            100% {
-                width: 100%;
-            }
+            0% { width: 0; }
+            100% { width: 100%; }
         }
 
         /* Floating animation */
@@ -320,22 +294,14 @@
         }
 
         @keyframes floating {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
         /* Form input styling */
         .form-input {
-            background: rgba(28, 37, 38, 0.9);
+            background: var(--black-accent);
             border: 1px solid var(--primary);
             border-radius: 6px;
             padding: 0.5rem;
@@ -366,38 +332,27 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-            }
-
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-            }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 184, 11, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(229, 184, 11, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 184, 11, 0); }
         }
 
-        /* Background pattern for subtle texture */
+        /* Background pattern */
         .bg-pattern {
-            background-color: rgba(28, 37, 38, 0.9);
-            background-image: radial-gradient(#FFD700 0.8px, transparent 0.8px);
+            background-color: var(--black-accent);
+            background-image: radial-gradient(var(--primary) 0.8px, transparent 0.8px);
             background-size: 30px 30px;
             background-position: 0 0;
         }
 
         /* Glass effect for navigation */
         .glass-effect {
-            background: rgba(255, 215, 0, 0.15);
+            background: rgba(229, 184, 11, 0.15);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.25);
+            border: 1px solid rgba(229, 184, 11, 0.25);
         }
 
-        /* Navigation link styling with enhanced hover */
+        /* Navigation link styling */
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
@@ -408,7 +363,7 @@
         .nav-link:hover {
             color: var(--primary);
             transform: translateY(-2px);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 10px rgba(229, 184, 11, 0.5);
             animation: bounce 0.3s ease;
         }
 
@@ -438,9 +393,9 @@
         .navButton:hover {
             color: var(--primary);
             transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
-            background: rgba(255, 215, 0, 0.1);
-            animation: glowPulse 1s infinite;
+            box-shadow: 0 4px 8px rgba(229, 184, 11, 0.3);
+            background: rgba(229, 184, 11, 0.1);
+            animation: none; /* Remove previous glowPulse to avoid conflict */
         }
 
         .navButton.pulse-active {
@@ -448,20 +403,9 @@
         }
 
         @keyframes clickPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-            }
-
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 0 0 8px rgba(255, 215, 0, 0.3);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-            }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 184, 11, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(229, 184, 11, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 184, 11, 0); }
         }
 
         /* Icon spin animation */
@@ -470,33 +414,28 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Card glow effect */
         .card-glow:hover {
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 15px rgba(229, 184, 11, 0.4);
         }
 
-        /* Logo text styling with pulse animation */
+        /* Logo text styling */
         .logo-text {
             position: relative;
             display: inline-block;
             transition: all 0.3s ease;
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+            text-shadow: 0 0 12px rgba(229, 184, 11, 0.7);
             animation: logo-pulse 3s ease-in-out infinite;
             text-transform: uppercase;
         }
 
         .logo-text:hover {
             transform: scale(1.1);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+            text-shadow: 0 0 20px rgba(229, 184, 11, 0.9);
         }
 
         .logo-text::before {
@@ -516,59 +455,37 @@
         }
 
         @keyframes logo-pulse {
-            0% {
-                text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
-            }
-
-            50% {
-                text-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
-            }
-
-            100% {
-                text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
-            }
+            0% { text-shadow: 0 0 8px rgba(229, 184, 11, 0.7); }
+            50% { text-shadow: 0 0 15px rgba(229, 184, 11, 0.9); }
+            100% { text-shadow: 0 0 8px rgba(229, 184, 11, 0.7); }
         }
 
-        /* Shiny badge for popular items */
+        /* Shiny badge */
         .shiny-badge {
             background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
-            color: #000000;
+            color: #1C1C1C;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
             animation: shiny 2s ease-in-out infinite;
         }
 
         @keyframes shiny {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Button click effect */
+        /* Button click effect for other buttons */
         .btn-clicked {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
-            color: #000000 !important;
+            color: #1C1C1C !important;
             border-color: var(--primary-dark) !important;
-        }
-
-        .services-btn:hover,
-        .custom-package-btn:hover {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
-            color: #000000 !important;
-            border-color: var(--primary-dark) !important;
-            animation: glowPulse 1s infinite;
         }
 
         /* Process number styling */
         .process-number {
             transition: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #1C1C1C;
         }
 
         /* Back to top button */
@@ -577,7 +494,7 @@
             bottom: 20px;
             right: 20px;
             background: var(--primary);
-            color: #000;
+            color: #1C1C1C;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -595,7 +512,7 @@
 
         .back-to-top:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(229, 184, 11, 0.5);
             animation: bounce 0.3s ease;
         }
 
@@ -620,7 +537,6 @@
 
             .service-card {
                 max-width: 300px;
-                /* Further reduced for mobile */
                 padding: 0.75rem;
             }
 
@@ -642,7 +558,7 @@
 
             .mobile-menu {
                 display: none;
-                background: rgba(28, 37, 38, 0.95);
+                background: rgba(28, 28, 28, 0.95);
                 position: absolute;
                 top: 4rem;
                 left: 0;
@@ -671,7 +587,7 @@
 
             .mobile-menu a:hover {
                 color: var(--primary);
-                background: rgba(255, 215, 0, 0.1);
+                background: rgba(229, 184, 11, 0.1);
                 transform: translateX(5px);
             }
 
@@ -702,7 +618,9 @@
             }
 
             .btn-primary,
-            .btn-instagram {
+            .btn-instagram,
+            .services-btn,
+            .custom-package-btn {
                 font-size: 0.8rem;
                 padding: 0.5rem 1rem;
             }
@@ -719,7 +637,6 @@
                 padding: 0.5rem;
             }
 
-            /* Stack feature and service cards vertically on mobile */
             .features-grid,
             .services-grid {
                 flex-direction: column;
@@ -741,14 +658,13 @@
             }
 
             .btn-primary,
-            .btn-instagram {
-
-                font-size: affirmé .btn-primary,
-                .btn-instagram {
-                    font-size: 0.75rem;
-                    padding: 0.4rem 0.8rem;
-                }
+            .btn-instagram,
+            .services-btn,
+            .custom-package-btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
             }
+        }
     </style>
 </head>
 
@@ -808,7 +724,7 @@
                         class="bg-gold-400/20 px-3 py-1 rounded-full text-xs font-medium mb-4 inline-flex items-center">
                         <svg class="w-4 h-4 mr-1 icon-spin text-gold-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0 significationsl3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
                                 clip-rule="evenodd"></path>
                         </svg>
                         LIMITED SLOTS AVAILABLE
@@ -824,12 +740,13 @@
                         <a href="#services"
                             class="bg-transparent border-2 border-gold-400 text-gold-400 px-4 py-2 rounded-md font-medium services-btn">Our
                             Services</a>
-                        <a href="https://www.instagram.com/buildoraofficial/" target="_blank"
+                        <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=ypoy2lk"
+                            target="_blank"
                             class="btn-instagram px-4 py-2 rounded-md font-medium flex items-center group">
                             <svg class="w-4 h-4 mr-2 group-hover:animate-bounce" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.541.07-2.927.427-4.027 1.527-1.1 1.1-1.458 2.486-1.527 4.027C2.014 8.333 2 8.741 2 12s.014 3.667.072 4.947c.07 1.541.427 2.927 1.527 4.027 1.1 1.1 2.486 1.458 4.027 1.527 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.541-.07 2.927-.427 4.027-1.527 1.1-1.1 1.458-2.486 1.527-4.027.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.07-1.541-.427-2.927-1.527-4.027-1.1-1.1-2.486-1.458-4.027-1.527-1.28-.058-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
+                                    d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.24 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.680.014-4.947.072-1.541.07-2.927.427-4.027 1.527-1.1 1.1-1.458 2.486-1.527 4.027C2.014 8.333 2 8.741 2 12s.014 3.667.072 4.947c.07 1.541.427 2.927 1.527 4.027 1.1 1.1 2.486 1.458 4.027 1.527 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.541-.07 2.927-.427 4.027-1.527 1.1-1.1 1.458-2.486 1.527-4.027.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.07-1.541-.427-2.927-1.527-4.027-1.1-1.1-2.486-1.458-4.027-1.527-1.28-.058-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                             </svg>
                             Instagram Query
                         </a>
@@ -853,7 +770,7 @@
                         <svg class="w-5 h-5 text-gold-400 card-icon" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                d="M12 2l3 7h6l-5 4 2 7-6-5-6 5 2-7-5-4h6l3-7z"></path>
                         </svg>
                     </div>
                     <h3 class="text-lg font-semibold mb-2 text-center text-gold-400">Fast Turnaround</h3>
@@ -1043,7 +960,7 @@
                             <li class="flex items-center justify-center">
                                 <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
-                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7. شاخصl7.293a1 1 0 011.414 0z"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 Detailed Documentation
@@ -1220,7 +1137,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#home" class="back-to-top">
+    <a href="#home" class="back-to-top navButton">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
@@ -1231,24 +1148,23 @@
         // Initialize AOS for scroll animations
         AOS.init({
             duration: 1000,
-            easing: 'ease-out-quart',
             once: true
         });
 
         // Initialize Particles.js for golden star background
         particlesJS('particles-js', {
             particles: {
-                number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: '#FFD700' },
+                number: { value: 150, density: { enable: true, value_area: 800 } },
+                color: { value: '#E5B80B' },
                 shape: { type: 'star', stroke: { width: 0, color: '#000000' } },
-                opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.3 } },
-                size: { value: 3, random: true },
-                move: { enable: true, speed: 2, direction: 'none', random: false }
+                opacity: { value: 0.7, random: true, anim: { enable: true, speed: 2, opacity_min: 0.4 } },
+                size: { value: 3, random: true, anim: { enable: true, speed: 4, size_min: 2 } },
+                move: { enable: true, speed: 3, direction: 'none', random: true }
             },
             interactivity: {
                 detect_on: 'canvas',
                 events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-                modes: { repulse: { distance: 100 }, push: { particles_nb: 4 } }
+                modes: { repulse: { distance: 120 }, push: { particles_nb: 6 } }
             }
         });
 
@@ -1264,14 +1180,19 @@
             document.querySelector('.mobile-menu').classList.toggle('active');
         });
 
-        // Toggle button click effect
+        // Toggle button click effect for services-btn and custom-package-btn
         document.querySelectorAll('.services-btn, .custom-package-btn').forEach(button => {
             button.addEventListener('click', function () {
                 this.classList.toggle('btn-clicked');
             });
         });
 
-        // Navigation button click effect
+        // Instagram button click effect
+        document.querySelector('.btn-instagram').addEventListener('click', function () {
+            this.classList.toggle('clicked');
+        });
+
+        // Navigation button click effect with smooth scrolling
         document.querySelectorAll('.navButton').forEach(button => {
             button.addEventListener('click', function (e) {
                 e.preventDefault();
